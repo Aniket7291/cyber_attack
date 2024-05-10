@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Attack Detection</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+#prediction-result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+</style>
+<body>
+    <h1>Cyber Attack Detection</h1>
+    <form id="prediction-form">
+        <label for="feature1">Feature 1:</label>
+        <input type="text" id="feature1" name="feature1" placeholder="Enter Feature 1">
+        <label for="feature2">Feature 2:</label>
+        <input type="text" id="feature2" name="feature2" placeholder="Enter Feature 2">
+        <!-- Add more input fields for additional features -->
+        <button type="submit">Predict</button>
+    </form>
+    <div id="prediction-result"></div>
+    <script>
+        <script>
+    $(document).ready(function() {
+        $('#prediction-form').submit(function(event) {
+            event.preventDefault();
+            var formData = {
+                'feature1': $('#feature1').val(),
+                'feature2': $('#feature2').val()
+                // Add more fields as needed
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/predict',
+                data: JSON.stringify({ 'data': formData }),
+                contentType: 'application/json',
+                success: function(response) {
+                    $('#prediction-result').text('Prediction: ' + response.prediction);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
+</script>
+
+    </script>
+</body>
+</html>
